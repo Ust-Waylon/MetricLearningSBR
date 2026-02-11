@@ -42,10 +42,10 @@ Detailed requirements are in requirements.txt.
 
 2. Prepare the datasets.
     - For SR-GNN, LESSR, SASRec and DIDN, the preprocessed datasets are already prepared in the 'datasets' folder.
-    - For RAIN and A-Mixer, the datasets need to be further processed. Take RAIN as an example, run:
+    - For RAIN and A-Mixer, the datasets need to be further processed (since the format is not compatible). Take RAIN as an example, run:
         ```bash
         cd RAIN
-        python preprocess.py
+        python process_datasets.py
         ```
         This will process the all the datasets and save them in the 'RAIN/datasets' folder.
     The procedure for the A-Mixer is similar.
