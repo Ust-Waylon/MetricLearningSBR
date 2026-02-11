@@ -124,7 +124,7 @@ import time
 from torch.utils.data import DataLoader
 from data.dataset import read_dataset, AugmentedDataset
 from sasrec import SelfAttentiveSessionEncoder
-from train_runner import train, evaluate, evaluate_with_XBOX, print_results
+from train_runner import train, evaluate, print_results
 
 dataset_dir = Path(args.dataset_dir)
 args.Ks = [int(K) for K in args.Ks.split(',')]
@@ -212,6 +212,8 @@ best_results = defaultdict(float)
 best_epochs = defaultdict(int)
 
 timestamp = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time()))
+if not os.path.exists('best_model_weight'):
+    os.makedirs('best_model_weight')
 best_model_path = f'best_model_weight/best_model_{timestamp}.pth'
 print(f"Best model path: {best_model_path}")
 
@@ -222,12 +224,6 @@ for epoch in tqdm(range(args.epochs)):
     start_time = time.time()
     results = evaluate(model, valid_loader, device, Ks=args.Ks)
     end_time = time.time()
-    print(f"Time taken for evaluation: {end_time - start_time} seconds")
-
-    start_time = time.time()
-    results_with_XBOX = evaluate_with_XBOX(model, valid_loader, device, Ks=args.Ks)
-    end_time = time.time()
-    print(f"Time taken for evaluation with XBOX: {end_time - start_time} seconds")
 
     if results['HR@20'] > best_results['HR@20']:
         best_results = results

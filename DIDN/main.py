@@ -113,6 +113,17 @@ parser.add_argument('--logit_type', type=str, default='dot', help='the type of l
 parser.add_argument('--scale', type=float, default=1.0, help='the scale of the logit function')
 
 args = parser.parse_args()
+
+if args.logit_type == 'euclidean':
+    if args.dataset_dir == '../datasets/tmall/':
+        args.scale = 16
+    elif args.dataset_dir == '../datasets/retailrocket/':
+        args.scale = 12
+    elif args.dataset_dir == '../datasets/lastfm/':
+        args.scale = 1
+    else:
+        print(f"Unknown dataset: {args.dataset_dir}, using scale factor {args.scale}")
+
 print(args)
 
 device = th.device('cuda' if th.cuda.is_available() else 'cpu')

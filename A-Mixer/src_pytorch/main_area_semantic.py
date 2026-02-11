@@ -52,6 +52,17 @@ parser.add_argument('--logit_type', type=str, default='dot', choices=['dot', 'eu
 parser.add_argument_group()
 
 opt = parser.parse_args()
+
+if opt.logit_type == 'euclidean':
+    opt.batchSize = 512
+    if opt.dataset == 'tmall':
+        opt.scale = 6
+    elif opt.dataset == 'retailrocket':
+        opt.scale = 8
+    elif opt.dataset == 'lastfm':
+        opt.scale = 10
+    else:
+        print(f"Unknown dataset: {opt.dataset}, using scale factor {opt.scale}")
 print(opt)
 
 hyperparameter_defaults = vars(opt)

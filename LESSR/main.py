@@ -69,6 +69,17 @@ parser.add_argument(
     help='the scale of the logit function',
 )
 args = parser.parse_args()
+
+if args.logit_type == 'euclidean':
+    if args.dataset_dir == '../datasets/tmall/':
+        args.scale = 10
+    elif args.dataset_dir == '../datasets/retailrocket/':
+        args.scale = 12
+    elif args.dataset_dir == '../datasets/lastfm/':
+        args.scale = 16
+    else:
+        print(f"Unknown dataset: {args.dataset_dir}, using scale factor {args.scale}")
+
 print(args)
 
 from pathlib import Path

@@ -22,6 +22,17 @@ parser.add_argument('--logit_type', type=str, default='dot', help='logit type: d
 parser.add_argument('--scale', type=float, default=1.0, help='scale factor')
 
 opt = parser.parse_args()
+
+if opt.logit_type == 'euclidean':
+    if opt.dataset == 'tmall':
+        opt.scale = 10
+    elif opt.dataset == 'retailrocket':
+        opt.scale = 10
+    elif opt.dataset == 'lastfm':
+        opt.scale = 12
+    else:
+        print(f"Unknown dataset: {opt.dataset}, using scale factor {opt.scale}")
+
 print(opt)
 
 

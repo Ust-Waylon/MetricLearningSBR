@@ -31,6 +31,17 @@ parser.add_argument('--valid_portion', type=float, default=0.1, help='split the 
 parser.add_argument('--logit_type', type=str, default='dot', help='dot product or euclidean')
 parser.add_argument('--scale', type=float, default=1.0, help='scale factor')
 opt = parser.parse_args()
+
+if opt.logit_type == 'euclidean':
+    if opt.dataset == 'tmall':
+        opt.scale = 6
+    elif opt.dataset == 'retailrocket':
+        opt.scale = 6
+    elif opt.dataset == 'lastfm':
+        opt.scale = 8
+    else:
+        print(f"Unknown dataset: {opt.dataset}, using scale factor {opt.scale}")
+
 print(opt)
 
 
