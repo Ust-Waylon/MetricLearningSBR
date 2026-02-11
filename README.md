@@ -35,6 +35,7 @@ Detailed requirements are in requirements.txt.
         conda create -n lessr python=3.7
         conda activate lessr
         conda install cudatoolkit=11.8
+        cd LESSR
         pip install -r requirements.txt
         ```
         Use the lessr environment for LESSR.
